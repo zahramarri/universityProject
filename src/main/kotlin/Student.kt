@@ -13,7 +13,6 @@ class Student(
     var totalCredits by Delegates.notNull<Int>()
     var average by Delegates.notNull<Double>()
 
-
     init {
         for (course in listOfCourses) {
             totalCredits += course.credit

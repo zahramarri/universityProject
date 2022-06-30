@@ -10,8 +10,19 @@ object University {
         }
     }
 
-    fun addProfessor() {}
-    fun removeProfessor() {}
-    fun addStudent() {}
-    fun removeStudent() {}
+    fun addProfessor(professor: Professor) {
+        listOfProfessors.add(professor)
+    }
+
+    fun removeProfessor(professor: Professor) {
+        listOfProfessors.remove(professor)
+    }
+
+    fun addStudent(student: Student) {
+        listOfStudents.add(student)
+    }
+
+    fun removeStudent(student: Student) {
+        listOfStudents.remove(student)
+    }
 }
