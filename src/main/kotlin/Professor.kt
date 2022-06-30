@@ -10,6 +10,11 @@ class Professor(
 ) : Person(name, identificationNumber, dateOfBirth, id) {
     val listOfCourses: MutableList<Course> = mutableListOf()
 
-    fun addLesson() {}
-    fun removeLesson() {}
+    fun addCourse(course: Course) {
+        listOfCourses.add(course)
+    }
+
+    fun removeCourse(course: Course) {
+        listOfCourses.remove(course)
+    }
 }
