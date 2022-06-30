@@ -9,4 +9,8 @@ class Student(
 ) : Person(name, identificationNumber, dateOfBirth, id) {
     val listOfLessons: MutableList<Lesson> = mutableListOf()
     val gradeOfLesson: MutableMap<Lesson, Double> = mutableMapOf()
+
+    fun addLesson() {}
+    fun removeLesson() {}
+    fun showProgress() {}
 }
