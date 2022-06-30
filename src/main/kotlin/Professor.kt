@@ -8,7 +8,7 @@ class Professor(
     rank: Rank,
     id: Int,
 ) : Person(name, identificationNumber, dateOfBirth, id) {
-    val listOfLessons: MutableList<Lesson> = mutableListOf()
+    val listOfCourses: MutableList<Course> = mutableListOf()
 
     fun addLesson() {}
     fun removeLesson() {}

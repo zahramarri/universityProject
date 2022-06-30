@@ -1,10 +1,12 @@
 import java.time.LocalDateTime
+import kotlin.properties.Delegates
 
-class Lesson(
+class Course(
     title: String,
     major: Major,
-    CourseCredit: Int,
+    credit: Int,
     id: Int,
 ) {
+    var credit by Delegates.notNull<Int>()
     lateinit var dateOfExam: LocalDateTime
 }
