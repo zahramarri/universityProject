@@ -6,10 +6,11 @@ class Student(
     identificationNumber: Int,
     dateOfBirth: LocalDateTime,
     id: Int,
-    major: Major
+    major: Major,
 ) : Person(name, identificationNumber, dateOfBirth, id) {
     val listOfCourses: MutableList<Course> = mutableListOf()
-    val gradeINCourse: MutableMap<Course, Double> = mutableMapOf()
+    val gradesInCourse: MutableMap<Course, MutableList<Double>> = mutableMapOf()
+    val averageGradeINCourse: MutableMap<Course, Double> = mutableMapOf()
     var totalCredits by Delegates.notNull<Int>()
     var average by Delegates.notNull<Double>()
 
@@ -18,14 +19,57 @@ class Student(
             totalCredits += course.credit
         }
 
-        var sum = 0.0
+        var sum1 = 0.0
         for (course in listOfCourses) {
-            sum += gradeINCourse[course]!!
+            sum1 += averageGradeINCourse[course]!!
         }
-        average = sum / totalCredits
+        average = sum1 / totalCredits
+
+        var sum2 = 0.0
+        for (course in listOfCourses) {
+            for (grade in gradesInCourse[course]!!) {
+                sum2 += grade
+            }
+            averageGradeINCourse[course] = sum2 / (gradesInCourse[course]?.size!!)
+        }
     }
 
-    fun addLesson() {}
-    fun removeLesson() {}
-    fun showProgress() {}
+    fun addCourse(course: Course) {
+        listOfCourses.add(course)
+    }
+
+    fun removeCourse(course: Course) {
+        listOfCourses.add(course)
+    }
+
+    fun evaluate(course: Course, periodStartPoint: LocalDateTime, periodEndPoint: LocalDateTime): String {
+        val listOfIntendedExam: MutableList<Exam> = mutableListOf()
+        for (exam in course.listOfExams) {
+            if (exam.date >= periodStartPoint || exam.date <= periodEndPoint) {
+                listOfIntendedExam.add(exam)
+            }
+        }
+
+        listOfIntendedExam.sortWith(compareBy { it.date })
+
+        var i = 1
+        var progress = 0
+        while (i < listOfIntendedExam.size) {
+            if (listOfIntendedExam[i].grade - listOfIntendedExam[i - 1].grade > 0) {
+                progress++
+            } else if (listOfIntendedExam[i].grade - listOfIntendedExam[i - 1].grade < 0) {
+                progress--
+            }
+
+            i++
+        }
+
+        return if (progress > 0) {
+            "Progress"
+        } else if (progress < 0) {
+            "Relapsed"
+        } else {
+            "No Change"
+        }
+    }
 }
