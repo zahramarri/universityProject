@@ -182,11 +182,10 @@ object Test {
             }
         }
     }
+}
 
-    fun loadTestDataExam() {
-
-    fun testTakeCourse() {
-
-    }
-
+fun main() {
+    Test.loadTestDataProfessors()
+    Test.loadTestDataStudents()
+    Test.loadTestDataCourses()
 }

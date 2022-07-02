@@ -13,29 +13,32 @@ class Student(
     val gradeInExam: MutableMap<Exam, Double> = mutableMapOf()
     val listOfCourses: MutableList<Course> = mutableListOf()
     val gradesInCourse: MutableMap<Course, MutableList<Double>> = mutableMapOf()
-    val averageGradeINCourse: MutableMap<Course, Double> = mutableMapOf()
-    var totalCredits by Delegates.notNull<Int>()
-    var average by Delegates.notNull<Double>()
-
-    init {
-        for (course in listOfCourses) {
-            totalCredits += course.credit
-        }
-
-        var sum1 = 0.0
-        for (course in listOfCourses) {
-            sum1 += averageGradeINCourse[course]!! * course.credit
-        }
-        average = sum1 / totalCredits
-
+        get() {
         var sum2 = 0.0
         for (course in listOfCourses) {
-            for (grade in gradesInCourse[course]!!) {
+            for (grade in field[course]!!) {
                 sum2 += grade
             }
-            averageGradeINCourse[course] = sum2 / (gradesInCourse[course]?.size!!)
+            averageGradeINCourse[course] = sum2 / (field[course]?.size!!)
         }
+        return field
     }
+    val averageGradeINCourse: MutableMap<Course, Double> = mutableMapOf()
+    var totalCredits: Int = 0
+        get() {
+            for (course in listOfCourses) {
+                field += course.credit
+            }
+            return field
+        }
+    val average: Double
+        get() {
+            var sum1 = 0.0
+            for (course in listOfCourses) {
+                sum1 += averageGradeINCourse[course]!! * course.credit
+            }
+            return sum1 / totalCredits
+        }
 
     fun addCourse(course: Course) {
         listOfCourses.add(course)
