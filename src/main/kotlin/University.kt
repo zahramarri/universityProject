@@ -1,7 +1,7 @@
 object University {
     val listOfProfessors: MutableList<Professor> = mutableListOf()
     val listOfStudents: MutableList<Student> = mutableListOf()
-    val listOfMages: MutableList<Major> = mutableListOf()
+    val listOfCourses: MutableList<Course> = mutableListOf()
 
     fun takeCourse(student: Student, course: Course) {
         if (student.totalCredits + course.credit <= 24 &&
@@ -24,5 +24,13 @@ object University {
 
     fun removeStudent(student: Student) {
         listOfStudents.remove(student)
+    }
+
+    fun addCourse(course: Course) {
+        listOfCourses.add(course)
+    }
+
+    fun removeCourse(course: Course) {
+        listOfCourses.remove(course)
     }
 }

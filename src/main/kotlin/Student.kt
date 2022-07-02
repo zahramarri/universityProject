@@ -7,8 +7,8 @@ class Student(
     identificationNumber: String,
     dateOfBirth: LocalDate,
     id: Int,
-    major: Major
 ) : Person(name, identificationNumber, dateOfBirth, id) {
+    lateinit var major: Major
     val listOfCourses: MutableList<Course> = mutableListOf()
     val gradesInCourse: MutableMap<Course, MutableList<Double>> = mutableMapOf()
     val averageGradeINCourse: MutableMap<Course, Double> = mutableMapOf()
