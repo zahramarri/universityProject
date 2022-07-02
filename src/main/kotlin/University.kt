@@ -6,7 +6,7 @@ object University {
     fun takeCourse(student: Student, course: Course) {
         if (student.totalCredits + course.credit <= 24 &&
             student.average > 17) {
-            student.listOfCourses.add(course)
+            student.addCourse(course)
         }
     }
 

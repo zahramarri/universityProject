@@ -1,12 +1,13 @@
+import java.time.LocalDate
 import java.time.LocalDateTime
 import kotlin.properties.Delegates
 
 class Student(
     name: String,
-    identificationNumber: Int,
-    dateOfBirth: LocalDateTime,
+    identificationNumber: String,
+    dateOfBirth: LocalDate,
     id: Int,
-    major: Major,
+    major: Major
 ) : Person(name, identificationNumber, dateOfBirth, id) {
     val listOfCourses: MutableList<Course> = mutableListOf()
     val gradesInCourse: MutableMap<Course, MutableList<Double>> = mutableMapOf()
@@ -45,7 +46,7 @@ class Student(
     fun evaluate(course: Course, periodStartPoint: LocalDateTime, periodEndPoint: LocalDateTime): String {
         val listOfIntendedExam: MutableList<Exam> = mutableListOf()
         for (exam in course.listOfExams) {
-            if (exam.date >= periodStartPoint || exam.date <= periodEndPoint) {
+            if (exam.date in periodStartPoint..periodEndPoint) {
                 listOfIntendedExam.add(exam)
             }
         }

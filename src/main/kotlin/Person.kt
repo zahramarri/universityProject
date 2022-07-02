@@ -1,8 +1,8 @@
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 open class Person(
     name: String,
-    identificationNumber: Int,
-    dateOfBirth: LocalDateTime,
+    identificationNumber: String,
+    dateOfBirth: LocalDate,
     id: Int,
 )

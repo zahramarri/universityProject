@@ -1,14 +1,15 @@
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 class Professor(
     name: String,
-    dateOfBirth: LocalDateTime,
-    identificationNumber: Int,
-    major: Major,
-    rank: Rank,
+    identificationNumber: String,
+    dateOfBirth: LocalDate,
     id: Int,
+    major: Major,
+    rank: Rank
 ) : Person(name, identificationNumber, dateOfBirth, id) {
     val listOfCourses: MutableList<Course> = mutableListOf()
+    val studentsInCourse: MutableMap<Course, MutableList<Student>> = mutableMapOf()
 
     fun addCourse(course: Course) {
         listOfCourses.add(course)
