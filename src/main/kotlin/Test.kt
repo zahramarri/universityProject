@@ -2,7 +2,62 @@ import java.time.LocalDate
 import java.time.Month
 
 object Test {
-    fun loadTestDataProfessors() {
+    fun loadTestData() {
+        val course1 = Course("Social Psychology", 30001)
+        course1.major = Major.Advertising
+        course1.credit = 1
+
+        val exam1 = Exam()
+        exam1.date = LocalDate.of(2022, Month.APRIL, 25)
+        val exam2 = Exam()
+        exam2.date = LocalDate.of(2022, Month.APRIL, 24)
+
+        course1.listOfExams.add(exam1)
+        course1.listOfExams.add(exam2)
+
+
+
+        val course2 = Course("Cultural Sociology", 30002)
+        course2.major = Major.Advertising
+        course2.credit = 2
+
+        val exam3 = Exam()
+        exam3.date = LocalDate.of(2022, Month.APRIL, 23)
+        val exam4 = Exam()
+        exam4.date = LocalDate.of(2022, Month.APRIL, 22)
+
+        course2.listOfExams.add(exam3)
+        course2.listOfExams.add(exam4)
+
+
+
+        val course3 = Course("Art and Communication", 30003)
+        course3.major = Major.BiologicalSciences
+        course3.credit = 3
+
+        val exam5 = Exam()
+        exam5.date = LocalDate.of(2022, Month.APRIL, 21)
+        val exam6 = Exam()
+        exam6.date = LocalDate.of(2022, Month.APRIL, 20)
+
+        course3.listOfExams.add(exam5)
+        course3.listOfExams.add(exam6)
+
+
+
+        val course4 = Course("Media Studies", 30004)
+        course4.major = Major.BiologicalSciences
+        course4.credit = 4
+
+        val exam7 = Exam()
+        exam7.date = LocalDate.of(2022, Month.APRIL, 20)
+        val exam8 = Exam()
+        exam8.date = LocalDate.of(2022, Month.APRIL, 20)
+
+        course4.listOfExams.add(exam7)
+        course4.listOfExams.add(exam8)
+
+
 
         val professor1 = Professor("Mohammed Alavi",
             "4210391182",
@@ -11,6 +66,9 @@ object Test {
             Major.Advertising,
             Rank.Professor
         )
+
+        professor1.listOfCourses.add(course1)
+        professor1.listOfCourses.add(course2)
 
         val professor2 = Professor(
             "Mohsen Elahi",
@@ -21,21 +79,10 @@ object Test {
             Rank.AssistantProfessor,
         )
 
-        val professor3 = Professor(
-            "Ali Keifi",
-            "4210391184",
-            LocalDate.of(1975, Month.NOVEMBER, 15),
-            10003,
-            Major.Communication,
-            Rank.Instructor,
-        )
+        professor2.listOfCourses.add(course3)
+        professor2.listOfCourses.add(course4)
 
-        University.addProfessor(professor1)
-        University.addProfessor(professor2)
-        University.addProfessor(professor3)
-    }
 
-    fun loadTestDataStudents() {
 
         val student1 = Student(
             "Saeed Sadeqi",
@@ -53,13 +100,16 @@ object Test {
         )
         student2.major = Major.BiologicalSciences
 
+        professor2.studentsInCourse[course3] = mutableListOf(student1, student2)
+        professor2.studentsInCourse[course4] = mutableListOf(student1, student2)
+
         val student3 = Student(
             "Azade Sarvari",
             "4210391187",
             LocalDate.of(1990, Month.APRIL, 23),
             20003,
         )
-        student3.major = Major.Communication
+        student3.major = Major.Advertising
 
         val student4 = Student(
             "Fateme Parsi",
@@ -67,125 +117,40 @@ object Test {
             LocalDate.of(1990, Month.APRIL, 22),
             20004,
         )
-        student4.major = Major.Communication
+        student4.major = Major.Advertising
 
-        val student5 = Student(
-            "Mina Asqari",
-            "4210391189",
-            LocalDate.of(1990, Month.APRIL, 21),
-            20005,
-        )
-        student5.major = Major.Advertising
+        professor1.studentsInCourse[course1] = mutableListOf(student3, student4)
+        professor1.studentsInCourse[course2] = mutableListOf(student3, student4)
 
-        val student6 = Student(
-            "Ali Baqi",
-            "4210391190",
-            LocalDate.of(1990, Month.APRIL, 20),
-            20006,
-        )
-        student6.major = Major.Advertising
 
-        University.addStudent(student1)
-        University.addStudent(student2)
-        University.addStudent(student3)
-        University.addStudent(student4)
-        University.addStudent(student5)
-        University.addStudent(student6)
 
-    }
+        student1.addCourse(course3)
+        student1.addCourse(course4)
+        student2.addCourse(course3)
+        student2.addCourse(course4)
 
-    fun loadTestDataCourses() {
+        student3.addCourse(course1)
+        student3.addCourse(course2)
+        student4.addCourse(course1)
+        student4.addCourse(course2)
 
-        val course1 = Course("Social Psychology", 30001)
-        course1.major = Major.Advertising
-        course1.credit = 1
-        val course2 = Course("Cultural Sociology", 30002)
-        course2.major = Major.Advertising
-        course2.credit = 2
-        val course3 = Course("Art and Communication", 30003)
-        course3.major = Major.Advertising
-        course3.credit = 3
-        val course4 = Course("Media Studies", 30004)
-        course4.major = Major.Advertising
-        course4.credit = 4
 
-        val course5 = Course("General Physics of Biology", 30005)
-        course5.major =  Major.BiologicalSciences
-        course5.credit = 1
-        val course6 = Course("General Mathematics", 30006)
-        course6.major =  Major.BiologicalSciences
-        course6.credit = 2
-        val course7 = Course("Biostatistics", 30007)
-        course7.major =  Major.BiologicalSciences
-        course7.credit = 3
-        val course8 = Course("Biological data Processing", 30008)
-        course8.major =  Major.BiologicalSciences
-        course8.credit = 4
 
-        val course9 = Course("Methods of Checking the Audience", 30009)
-        course9.major = Major.Communication
-        course9.credit = 1
-        val course10 = Course("Sociology of Persuasion and Propaganda", 30010 )
-        course10.major = Major.Communication
-        course10.credit = 2
-        val course11 = Course("Music, Culture and Society", 30011 )
-        course11.major = Major.Communication
-        course11.credit = 3
-        val course12 = Course("Sociology of Art and Literature", 30012 )
-        course12.major = Major.Communication
-        course12.credit = 4
-
-        val exam1 = Exam()
-        exam1.date = LocalDate.of(2022, Month.APRIL, 25)
-        val exam2 = Exam()
-        exam1.date = LocalDate.of(2022, Month.APRIL, 24)
-        val exam3 = Exam()
-        exam1.date = LocalDate.of(2022, Month.APRIL, 23)
-        val exam4 = Exam()
-        exam1.date = LocalDate.of(2022, Month.APRIL, 22)
-        val exam5 = Exam()
-        exam1.date = LocalDate.of(2022, Month.APRIL, 21)
-        val exam6 = Exam()
-        exam1.date = LocalDate.of(2022, Month.APRIL, 20)
-        val exam7 = Exam()
-        exam1.date = LocalDate.of(2022, Month.APRIL, 25)
-        val exam8 = Exam()
-        exam1.date = LocalDate.of(2022, Month.APRIL, 19)
-
-        course1.listOfExams.add(exam1)
-        course1.listOfExams.add(exam2)
-        course5.listOfExams.add(exam3)
-        course5.listOfExams.add(exam4)
-        course9.listOfExams.add(exam5)
-        course9.listOfExams.add(exam6)
-        course2.listOfExams.add(exam7)
-        course2.listOfExams.add(exam8)
-
-        University.addCourse(course1)
-        University.addCourse(course2)
-        University.addCourse(course3)
-        University.addCourse(course4)
-        University.addCourse(course5)
-        University.addCourse(course6)
-        University.addCourse(course7)
-        University.addCourse(course8)
-        University.addCourse(course9)
-        University.addCourse(course10)
-        University.addCourse(course11)
-        University.addCourse(course12)
-
+        University.listOfStudents.addAll(mutableListOf(student1, student2, student3, student4))
         for (student in University.listOfStudents) {
-            for (course in University.listOfCourses) {
-                if (student.major == course.major) {
-                    student.addCourse(course)
-                }
+            for (exam in student.listOfExams) {
+                student.gradeInExam[exam] = (0..20).random().toDouble()
+                println(student.gradeInExam[exam])
             }
         }
+
+
+
+        println(student1.evaluate(course3, LocalDate.of(2022, Month.MARCH, 1), LocalDate.of(2022, Month.MAY, 1)))
     }
 }
 
+
 fun main() {
-    Test.loadTestDataProfessors()
-    Test.loadTestDataStudents()
-    Test.loadTestDataCourses()
+    Test.loadTestData()
 }

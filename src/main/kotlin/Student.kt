@@ -1,6 +1,4 @@
 import java.time.LocalDate
-import java.time.LocalDateTime
-import kotlin.properties.Delegates
 
 class Student(
     name: String,
@@ -10,20 +8,32 @@ class Student(
 ) : Person(name, identificationNumber, dateOfBirth, id) {
     lateinit var major: Major
     val listOfExams: MutableList<Exam> = mutableListOf()
+    private val listOfCourses: MutableList<Course> = mutableListOf()
     val gradeInExam: MutableMap<Exam, Double> = mutableMapOf()
-    val listOfCourses: MutableList<Course> = mutableListOf()
     val gradesInCourse: MutableMap<Course, MutableList<Double>> = mutableMapOf()
         get() {
-        var sum2 = 0.0
-        for (course in listOfCourses) {
-            for (grade in field[course]!!) {
-                sum2 += grade
+            for (course in listOfCourses) {
+                for (exam1 in course.listOfExams) {
+                    for (exam2 in listOfExams) {
+                        if (exam1.date == exam2.date) {
+                            field[course]?.add(gradeInExam[exam1]!!)
+                        }
+                    }
+                }
             }
-            averageGradeINCourse[course] = sum2 / (field[course]?.size!!)
+            return field
         }
-        return field
-    }
     val averageGradeINCourse: MutableMap<Course, Double> = mutableMapOf()
+        get() {
+            var sum2 = 0.0
+            for (course in listOfCourses) {
+                for (grade in gradesInCourse[course]!!) {
+                    sum2 += grade
+                }
+                averageGradeINCourse[course] = sum2 / (gradesInCourse[course]?.size!!)
+            }
+            return field
+        }
     var totalCredits: Int = 0
         get() {
             for (course in listOfCourses) {
@@ -43,10 +53,6 @@ class Student(
     fun addCourse(course: Course) {
         listOfCourses.add(course)
         listOfExams.addAll(course.listOfExams)
-    }
-
-    fun removeCourse(course: Course) {
-        listOfCourses.add(course)
     }
 
     fun evaluate(course: Course, periodStartPoint: LocalDate, periodEndPoint: LocalDate): String {
