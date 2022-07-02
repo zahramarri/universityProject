@@ -3,7 +3,6 @@ import java.time.Month
 
 object Test {
     fun loadTestDataProfessors() {
-        University.listOfProfessors.clear()
 
         val professor1 = Professor("Mohammed Alavi",
             "4210391182",
@@ -37,7 +36,6 @@ object Test {
     }
 
     fun loadTestDataStudents() {
-        University.listOfStudents.clear()
 
         val student1 = Student(
             "Saeed Sadeqi",
@@ -97,37 +95,71 @@ object Test {
     }
 
     fun loadTestDataCourses() {
-        for (student in University.listOfStudents) {
-            student.listOfCourses.clear()
-        }
-        University.listOfCourses.clear()
 
-        val course1 = Course("Social Psychology", 1, 30001)
+        val course1 = Course("Social Psychology", 30001)
         course1.major = Major.Advertising
-        val course2 = Course("Cultural Sociology", 2, 30002)
+        course1.credit = 1
+        val course2 = Course("Cultural Sociology", 30002)
         course2.major = Major.Advertising
-        val course3 = Course("Art and Communication", 3, 30003)
+        course2.credit = 2
+        val course3 = Course("Art and Communication", 30003)
         course3.major = Major.Advertising
-        val course4 = Course("Media Studies", 4, 30004)
+        course3.credit = 3
+        val course4 = Course("Media Studies", 30004)
         course4.major = Major.Advertising
+        course4.credit = 4
 
-        val course5 = Course("General Physics of Biology", 4, 30005)
+        val course5 = Course("General Physics of Biology", 30005)
         course5.major =  Major.BiologicalSciences
-        val course6 = Course("General Mathematics", 3, 30006)
+        course5.credit = 1
+        val course6 = Course("General Mathematics", 30006)
         course6.major =  Major.BiologicalSciences
-        val course7 = Course("Biostatistics", 2, 30007)
+        course6.credit = 2
+        val course7 = Course("Biostatistics", 30007)
         course7.major =  Major.BiologicalSciences
-        val course8 = Course("Biological data Processing", 1, 30008)
+        course7.credit = 3
+        val course8 = Course("Biological data Processing", 30008)
         course8.major =  Major.BiologicalSciences
+        course8.credit = 4
 
-        val course9 = Course("Methods of Checking the Audience", 1, 30009)
+        val course9 = Course("Methods of Checking the Audience", 30009)
         course9.major = Major.Communication
-        val course10 = Course("Sociology of Persuasion and Propaganda", 2, 30010 )
+        course9.credit = 1
+        val course10 = Course("Sociology of Persuasion and Propaganda", 30010 )
         course10.major = Major.Communication
-        val course11 = Course("Music, Culture and Society", 3, 30011 )
+        course10.credit = 2
+        val course11 = Course("Music, Culture and Society", 30011 )
         course11.major = Major.Communication
-        val course12 = Course("Sociology of Art and Literature", 4, 30012 )
+        course11.credit = 3
+        val course12 = Course("Sociology of Art and Literature", 30012 )
         course12.major = Major.Communication
+        course12.credit = 4
+
+        val exam1 = Exam()
+        exam1.date = LocalDate.of(2022, Month.APRIL, 25)
+        val exam2 = Exam()
+        exam1.date = LocalDate.of(2022, Month.APRIL, 24)
+        val exam3 = Exam()
+        exam1.date = LocalDate.of(2022, Month.APRIL, 23)
+        val exam4 = Exam()
+        exam1.date = LocalDate.of(2022, Month.APRIL, 22)
+        val exam5 = Exam()
+        exam1.date = LocalDate.of(2022, Month.APRIL, 21)
+        val exam6 = Exam()
+        exam1.date = LocalDate.of(2022, Month.APRIL, 20)
+        val exam7 = Exam()
+        exam1.date = LocalDate.of(2022, Month.APRIL, 25)
+        val exam8 = Exam()
+        exam1.date = LocalDate.of(2022, Month.APRIL, 19)
+
+        course1.listOfExams.add(exam1)
+        course1.listOfExams.add(exam2)
+        course5.listOfExams.add(exam3)
+        course5.listOfExams.add(exam4)
+        course9.listOfExams.add(exam5)
+        course9.listOfExams.add(exam6)
+        course2.listOfExams.add(exam7)
+        course2.listOfExams.add(exam8)
 
         University.addCourse(course1)
         University.addCourse(course2)
@@ -150,4 +182,11 @@ object Test {
             }
         }
     }
+
+    fun loadTestDataExam() {
+
+    fun testTakeCourse() {
+
+    }
+
 }

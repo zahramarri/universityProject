@@ -4,9 +4,19 @@ object University {
     val listOfCourses: MutableList<Course> = mutableListOf()
 
     fun takeCourse(student: Student, course: Course) {
+        var flag = false
         if (student.totalCredits + course.credit <= 24 &&
-            student.average > 17) {
-            student.addCourse(course)
+            student.average > 17
+        ) {
+            for (exam1 in course.listOfExams) {
+                for (exam2 in student.listOfExams)
+                    if (exam1.date == exam2.date) {
+                        flag = true
+                    }
+            }
+            if (!flag) {
+                student.addCourse(course)
+            }
         }
     }
 
