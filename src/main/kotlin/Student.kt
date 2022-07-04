@@ -4,22 +4,24 @@ class Student(
     name: String,
     identificationNumber: String,
     dateOfBirth: LocalDate,
-    id: Int,
+    id: Int
 ) : Person(name, identificationNumber, dateOfBirth, id) {
     lateinit var major: Major
     val listOfExams: MutableList<Exam> = mutableListOf()
     private val listOfCourses: MutableList<Course> = mutableListOf()
     val gradeInExam: MutableMap<Exam, Double> = mutableMapOf()
-    val gradesInCourse: MutableMap<Course, MutableList<Double>> = mutableMapOf()
+    val gradesInCourse: MutableMap<Course, MutableList<Double?>> = mutableMapOf()
         get() {
             for (course in listOfCourses) {
+                val temp = mutableListOf<Double?>()
                 for (exam1 in course.listOfExams) {
                     for (exam2 in listOfExams) {
                         if (exam1.date == exam2.date) {
-                            field[course]?.add(gradeInExam[exam1]!!)
+                           temp.add(gradeInExam[exam2])
                         }
                     }
                 }
+                field[course] = temp
             }
             return field
         }
@@ -28,9 +30,11 @@ class Student(
             var sum2 = 0.0
             for (course in listOfCourses) {
                 for (grade in gradesInCourse[course]!!) {
-                    sum2 += grade
+                    if (grade != null) {
+                        sum2 += grade
+                    }
                 }
-                averageGradeINCourse[course] = sum2 / (gradesInCourse[course]?.size!!)
+                field[course] = sum2 / (gradesInCourse[course]?.size!!)
             }
             return field
         }

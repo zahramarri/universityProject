@@ -50,9 +50,9 @@ object Test {
         course4.credit = 4
 
         val exam7 = Exam()
-        exam7.date = LocalDate.of(2022, Month.APRIL, 20)
+        exam7.date = LocalDate.of(2022, Month.APRIL, 19)
         val exam8 = Exam()
-        exam8.date = LocalDate.of(2022, Month.APRIL, 20)
+        exam8.date = LocalDate.of(2022, Month.APRIL, 18)
 
         course4.listOfExams.add(exam7)
         course4.listOfExams.add(exam8)
@@ -144,8 +144,11 @@ object Test {
             }
         }
 
-
-
+        println(student1.gradesInCourse[course3])
+        println(student1.gradesInCourse[course4])
+        println(student1.totalCredits)
+        println(student1.averageGradeINCourse[course3])
+        println(student1.average)
         println(student1.evaluate(course3, LocalDate.of(2022, Month.MARCH, 1), LocalDate.of(2022, Month.MAY, 1)))
     }
 }
